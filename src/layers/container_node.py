@@ -9,5 +9,5 @@ class ContainerNode(Node):
         self.memory = primitive.memory._Memory__impl
 
     def execute(self):
-        self.output_memory = self.memory
+        self.output_memory = self.memory.copy()
 

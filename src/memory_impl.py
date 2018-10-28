@@ -34,3 +34,9 @@ class MemoryImpl:
 
     def get_shape(self):
         return self.shape
+
+    def copy(self):
+        new_memory = MemoryImpl(self.shape)
+        new_data = self.get_data()
+        new_memory.fill_data(new_data)
+        return new_memory
