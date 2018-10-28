@@ -6,10 +6,12 @@ import numpy as np
 
 # ---- TEST CONTAINER --------
 
-c = Container("input", Memory((3, 32, 32)))
+c = Container("input", Memory((10,)))
 a = Activation("Activ", "input", ActivationFunctions.RELU)
 
-c.fill(np.ones((3, 32, 32)))
+array = [1, 2, 3, -4, -5, -6, 0, 8, 9, -10]
+
+c.fill(np.asarray(array))
 
 net2 = Network([c, a])
 net2.execute() #not working, need to add topological sort
