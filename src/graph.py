@@ -14,6 +14,13 @@ class Graph:
             ErrorHandler.raise_error(node.id + "is already in nodes_map!!!")
         self.nodes_map[node.id] = node
 
+    def set_inputs_and_outputs(self):
+        for _, node in self.nodes_map.items():
+            if len(node.dependencies) == 0:
+                self.inputs.append(node)
+            if len(node.users) == 0:
+                self.outputs.append(node)
+
     def make_connections(self):
         for _, node in self.nodes_map.items():
             input_ids = node.primitive.inputs

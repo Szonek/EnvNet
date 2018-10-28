@@ -17,7 +17,9 @@ class NetworkImpl:
         self.graph.make_connections()
         if dump_graph is True:
             self.__dump_graph()
-        # [X] Next steps
+        # [3] Mark inputs and outputs nodes
+        self.graph.set_inputs_and_outputs()
+
 
     def __create_nodes(self, primitives):
         for prim in primitives:
