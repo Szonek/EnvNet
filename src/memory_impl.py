@@ -1,5 +1,7 @@
-from src.utils.error_handler import  ErrorHandler
 import numpy as np
+import copy
+
+from src.utils.error_handler import  ErrorHandler
 
 
 class MemoryImpl:
@@ -27,7 +29,7 @@ class MemoryImpl:
     It doesnt return original data. It copies the data.
     """
     def get_data(self):
-        return list(self.__data)
+        return copy.deepcopy(self.__data)
 
     def size(self):
         return np.prod(self.shape)

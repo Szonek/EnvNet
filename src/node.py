@@ -12,6 +12,7 @@ class Node:
         self.users = []
         self.dependencies = []
         self.output_memory = None
+        self.is_output = False
 
     def input(self, idx=0):
         if idx > len(self.dependencies)-1:

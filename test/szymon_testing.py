@@ -11,10 +11,11 @@ a = Activation("Activ", "input", ActivationFunctions.RELU)
 
 array = [1, 2, 3, -4, -5, -6, 0, 8, 9, -10]
 
-c.fill(np.asarray(array))
+c.fill(array)
 
 net2 = Network([c, a])
-net2.execute() #not working, need to add topological sort
+outputs = net2.execute()
+
 # ---- END --------
 
 print("end tests")

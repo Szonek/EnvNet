@@ -20,6 +20,7 @@ class Graph:
                 self.inputs.append(node)
             if len(node.users) == 0:
                 self.outputs.append(node)
+                node.is_output = True
 
     def make_connections(self):
         for _, node in self.nodes_map.items():

@@ -20,7 +20,6 @@ class NetworkImpl:
         # [3] Mark inputs and outputs nodes
         self.graph.set_inputs_and_outputs()
 
-
     def __create_nodes(self, primitives):
         for prim in primitives:
             primitive_type = type(prim).__name__
@@ -35,6 +34,9 @@ class NetworkImpl:
             file.write(graphviz_sir)
 
     def execute(self):
+        network_outputs = {}
         for id, node in self.graph.nodes_map.items():
             node.execute()
-        pass
+            if node.is_output is True:
+                network_outputs[id] = node.output_memory.get_data()
+        return network_outputs

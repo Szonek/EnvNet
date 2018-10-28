@@ -16,4 +16,4 @@ class Network:
     Just an example function.
     """
     def execute(self):
-        self.__impl.execute()
+        return self.__impl.execute()
