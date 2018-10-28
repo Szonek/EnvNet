@@ -9,8 +9,8 @@ class Network:
         primitives (list): List of primitives. Network is builded upon
             this list. No more primitive will be added to the network.
     """
-    def __init__(self, primitives):
-        self.__impl = NetworkImpl(primitives)
+    def __init__(self, primitives, dump_graph=False):
+        self.__impl = NetworkImpl(primitives, dump_graph)
 
     """
     Just an example function.

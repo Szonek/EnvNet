@@ -21,3 +21,11 @@ class Graph:
                 for inp_id in input_ids:
                     node.dependencies.append(self.nodes_map[inp_id])
                     self.nodes_map[inp_id].users.append(node)
+
+    def to_graph_viz_format(self):
+        graphviz_str = "digraph G { \n"
+        for node_id, node in self.nodes_map.items():
+            for dep in node.users:
+                graphviz_str += str("\"" + node_id + "\"" + " -> " + "\"" + dep.id + "\"\n")
+        graphviz_str += "}"
+        return graphviz_str

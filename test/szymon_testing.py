@@ -41,4 +41,10 @@ print("test mem size: ", mem.size())
 
 # ------------ END -----------------
 
+
+net = Network([a, b], dump_graph=True)
+
+# ----------- TEST DUMPING ------------
+
+
 print("end tests")
