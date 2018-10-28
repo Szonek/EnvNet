@@ -12,7 +12,7 @@ a = Activation("Activ", "input", ActivationFunctions.RELU)
 c.fill(np.ones((3, 32, 32)))
 
 net2 = Network([c, a])
-#net2.execute() not working, need to add topological sort
+net2.execute() #not working, need to add topological sort
 # ---- END --------
 
 print("end tests")

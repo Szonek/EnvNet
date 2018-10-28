@@ -1,6 +1,8 @@
 from src.node import Node
 from api.activation import ActivationFunctions
 from src.utils.error_handler import ErrorHandler
+from src.memory_impl import MemoryImpl
+import numpy as np
 
 
 class ActivationNode(Node):
@@ -18,5 +20,8 @@ class ActivationNode(Node):
             ErrorHandler.raise_error("[ERROR] Activation function for: " + self.id + " not implemented.")
 
     def execute(self):
-        output_shape = self.dependencies[0].output_memory.get_shpae()
-        print(output_shape)
+        input_memory = self.dependencies[0].output_memory
+        output_shape = input_memory.get_shape()
+        self.output_memory = MemoryImpl(output_shape)
+        vectorised_func = np.vectorize(self.do_activation)
+        self.output_memory.fill_data(vectorised_func(input_memory.get_data()))
