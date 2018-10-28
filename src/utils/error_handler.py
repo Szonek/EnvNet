@@ -31,3 +31,8 @@ class ErrorHandler:
     @classmethod
     def is_type_generic(cls, obj, generic_type):
         return cls.__is_instance(obj, generic_type)
+
+    @classmethod
+    def is_equal(cls, lhs, rhs):
+        if lhs != rhs:
+            raise Exception("Values are not equal.", str(lhs) + " != " + str(rhs), cls.__get_called_method())

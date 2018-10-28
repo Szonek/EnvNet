@@ -18,4 +18,5 @@ class ActivationNode(Node):
             ErrorHandler.raise_error("[ERROR] Activation function for: " + self.id + " not implemented.")
 
     def execute(self):
-        print("test execute activation node")
+        output_shape = self.dependencies[0].output_memory.get_shpae()
+        print(output_shape)

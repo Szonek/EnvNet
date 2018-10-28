@@ -9,7 +9,7 @@ class ActivationFunctions(Enum):
 
 
 class Activation(PrimitiveBase):
-    def __init__(self, id, inputs, activation_function):
+    def __init__(self, id, input, activation_function):
         ErrorHandler.is_type_generic(activation_function, ActivationFunctions)
-        super().__init__(id, inputs)
+        super().__init__(id, [input])
         self.activation = activation_function

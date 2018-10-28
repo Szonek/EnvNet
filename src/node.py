@@ -11,6 +11,7 @@ class Node:
         self.primitive = prim
         self.users = []
         self.dependencies = []
+        self.output_memory = None
 
     @abstractmethod
     def execute(self):

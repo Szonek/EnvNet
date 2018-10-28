@@ -31,3 +31,6 @@ class MemoryImpl:
 
     def size(self):
         return np.prod(self.shape)
+
+    def get_shape(self):
+        return self.shape
