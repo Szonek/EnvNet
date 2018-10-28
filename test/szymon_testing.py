@@ -7,8 +7,9 @@ import numpy as np
 
 # ----- TEST NETWORK ---------
 a = Activation("Activ", [], ActivationFunctions.RELU)
+b = Activation("Activ_2", ["Activ"], ActivationFunctions.NONE)
 
-net = Network([a])
+net = Network([a, b])
 
 net.execute()
 

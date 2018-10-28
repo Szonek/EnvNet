@@ -13,3 +13,11 @@ class Graph:
         if node.id in self.nodes_map:
             ErrorHandler.raise_error(node.id + "is already in nodes_map!!!")
         self.nodes_map[node.id] = node
+
+    def make_connections(self):
+        for _, node in self.nodes_map.items():
+            input_ids = node.primitive.inputs
+            if len(input_ids) != 0:
+                for inp_id in input_ids:
+                    node.dependencies.append(self.nodes_map[inp_id])
+                    self.nodes_map[inp_id].users.append(node)

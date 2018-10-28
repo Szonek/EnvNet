@@ -12,6 +12,7 @@ class NetworkImpl:
         # [1] Create nodes.
         self.__create_nodes(primitives)
         # [2] Connect nodes.
+        self.graph.make_connections()
         # [X] Next steps
 
     def __create_nodes(self, primitives):
