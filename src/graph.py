@@ -33,7 +33,11 @@ class Graph:
     def to_graph_viz_format(self):
         graphviz_str = "digraph G { \n"
         for node_id, node in self.nodes_map.items():
+            graphviz_str += node.id + " "
+            graphviz_str += "[label=\"" + node.id + "\\n" + \
+                            type(node).__name__ +  "\\n" +\
+                            str(node.execution_number) + "\"]\n"
             for dep in node.users:
-                graphviz_str += str("\"" + node_id + "\"" + " -> " + "\"" + dep.id + "\"\n")
+                graphviz_str += node_id + " -> " + dep.id + "\n"
         graphviz_str += "}"
         return graphviz_str

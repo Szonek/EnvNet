@@ -13,6 +13,7 @@ class Node:
         self.dependencies = []
         self.output_memory = None
         self.is_output = False
+        self.execution_number = -1
 
     def input(self, idx=0):
         if idx > len(self.dependencies)-1:
