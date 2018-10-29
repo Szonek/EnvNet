@@ -4,9 +4,10 @@ from src.node import Node
 
 class Graph:
     def __init__(self):
-        self.nodes_map = {}     # map {id, node}
-        self.inputs = []        # points to input nodes
-        self.outputs = []       # points to output nodes
+        self.nodes_map = {} # map {id, node}
+        self.input = None   # input (currently one input accepted)
+        self.outputs = []   # points to output nodes
+        self.exec_order = []
 
     def add_node(self, node):
         ErrorHandler.is_type_generic(node, Node)
@@ -17,7 +18,9 @@ class Graph:
     def set_inputs_and_outputs(self):
         for _, node in self.nodes_map.items():
             if len(node.dependencies) == 0:
-                self.inputs.append(node)
+                if self.input is not None:
+                    ErrorHandler.raise_error("Network already contains input.")
+                self.input = node
             if len(node.users) == 0:
                 self.outputs.append(node)
                 node.is_output = True
@@ -41,3 +44,17 @@ class Graph:
                 graphviz_str += node_id + " -> " + dep.id + "\n"
         graphviz_str += "}"
         return graphviz_str
+
+    def calc_dfs(self):
+        self.__calc_dfs_visit(self.input)
+        #and update execution numbers
+        idx = 0
+        for node in self.exec_order:
+            node.execution_number = idx
+            idx += 1
+
+
+    def __calc_dfs_visit(self, node):
+        self.exec_order.append(node)
+        for dep in node.users:
+            self.__calc_dfs_visit(dep)

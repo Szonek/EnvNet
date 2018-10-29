@@ -15,10 +15,12 @@ class NetworkImpl:
         self.__create_nodes(primitives)
         # [2] Connect nodes.
         self.graph.make_connections()
-        if dump_graph is True:
-            self.__dump_graph()
         # [3] Mark inputs and outputs nodes
         self.graph.set_inputs_and_outputs()
+        # [4] Calc DFS (execution order)
+        self.graph.calc_dfs()
+        if dump_graph is True:
+            self.__dump_graph()
 
     def __create_nodes(self, primitives):
         for prim in primitives:
