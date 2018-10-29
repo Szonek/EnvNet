@@ -37,7 +37,7 @@ class NetworkImpl:
 
     def execute(self):
         network_outputs = {}
-        for id, node in self.graph.nodes_map.items():
+        for node in self.graph.exec_order:
             node.execute()
             if node.is_output is True:
                 network_outputs[id] = node.output_memory.get_data()

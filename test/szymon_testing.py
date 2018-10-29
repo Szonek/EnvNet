@@ -18,7 +18,7 @@ array = [1, 2, 3, -4, -5, -6, 0, 8, 9, -10]
 
 c.fill(array)
 
-net2 = Network([c, a1, a2, a3, a4, a5, a6], dump_graph=True)
+net2 = Network([a1, a2, a3, c, a4, a5, a6], dump_graph=True)
 outputs = net2.execute()
 
 # ---- END --------
