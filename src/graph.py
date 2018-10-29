@@ -26,10 +26,12 @@ class Graph:
                 node.is_output = True
 
     def make_connections(self):
-        for _, node in self.nodes_map.items():
+        for node_id, node in self.nodes_map.items():
             input_ids = node.primitive.inputs
             if len(input_ids) != 0:
                 for inp_id in input_ids:
+                    if self.nodes_map.get(inp_id) is None:
+                        ErrorHandler.raise_error("There is no " + str(inp_id) + ", which is input to: "+ str(node_id))
                     node.dependencies.append(self.nodes_map[inp_id])
                     self.nodes_map[inp_id].users.append(node)
 

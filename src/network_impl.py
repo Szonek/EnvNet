@@ -40,5 +40,5 @@ class NetworkImpl:
         for node in self.graph.exec_order:
             node.execute()
             if node.is_output is True:
-                network_outputs[id] = node.output_memory.get_data()
+                network_outputs[node.id] = node.output_memory.get_data()
         return network_outputs
