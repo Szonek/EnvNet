@@ -1,0 +1,11 @@
+1. Layers:
+	- padding
+	- convolution
+	- fully connected
+	- softmax
+	- LRN
+	- reshape (Szymon)
+2. Graph:
+	- enable multi-inputs in graph (Szymon)
+4. Examples:
+	- prepare example file with LeNet architecture
