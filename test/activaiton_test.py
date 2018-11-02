@@ -48,4 +48,4 @@ class TestActivation(unittest.TestCase):
                 self.assertIsNotNone(net_out["output"])
                 reference_output = self.get_reference(activ_func, input_values)
                 real_output = net_out["output"]
-                #TODO : add check here
+                self.assertTrue(np.array_equal(reference_output, real_output))

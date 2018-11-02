@@ -24,6 +24,8 @@ class MemoryImpl:
         self.__data = copied_data
 
 
+    def get_original_data(self):
+        return self.__data
 
     """
     It doesnt return original data. It copies the data.

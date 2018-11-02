@@ -5,6 +5,7 @@ from src.utils.error_handler import ErrorHandler
 from src import graph
 from src.layers.activation_node import ActivationNode
 from src.layers.container_node import ContainerNode
+from src.layers.pooling_node import PoolingNode
 
 
 class NetworkImpl:
