@@ -7,4 +7,4 @@ class Concatenation(PrimitiveBase):
         ErrorHandler.is_list(inputs)
         ErrorHandler.is_type_generic(axis, int)
         super().__init__(id, inputs)
-        self.axis = 0
+        self.axis = axis

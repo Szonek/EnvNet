@@ -35,3 +35,27 @@ class TestConcatenation(unittest.TestCase):
         ref_output = np.concatenate((inp0_arr, inp1_arr), axis=0)
         self.assertEqual(real_output.shape, (5, 1, 2, 2))
         self.assertTrue(np.array_equal(ref_output, real_output))
+
+    def test_concat_feature(self):
+        input0 = Container("input0", Memory((2, 4, 1, 2)))
+        inp0_arr = np.array([0, 0, 1, 1, 2, 2, 3, 3,
+                            4, 4, 5, 5, 6, 6, 7, 7]).reshape((2, 4, 1, 2))
+        input0.fill(inp0_arr)
+
+        input1 = Container("input1", Memory((2, 1, 1, 2)))
+        inp1_arr = np.array([13, 13,
+                            24, 24]).reshape((2, 1, 1, 2))
+        input1.fill(inp1_arr)
+
+        concat = Concatenation("concat", ["input0", "input1"], axis=1)
+
+        layers = [input0, input1, concat]
+
+        network = Network(layers)
+        net_out = network.execute()
+        real_output = net_out["concat"]
+        self.assertEqual(len(net_out), 1)
+        self.assertIsNotNone(real_output)
+        ref_output = np.concatenate((inp0_arr, inp1_arr), axis=1)
+        self.assertEqual(real_output.shape, (2, 5, 1, 2))
+        self.assertTrue(np.array_equal(ref_output, real_output))
