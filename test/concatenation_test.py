@@ -29,4 +29,4 @@ class TestConcatenation(unittest.TestCase):
         net_out = network.execute()
         self.assertEqual(len(net_out), 1)
         self.assertIsNotNone(net_out["concat"])
-        self.assertEqual(net_out["output"], [0, 10, 0])
+        self.assertEqual(net_out["concat"])

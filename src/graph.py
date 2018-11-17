@@ -5,7 +5,7 @@ from src.node import Node
 class Graph:
     def __init__(self):
         self.nodes_map = {} # map {id, node}
-        self.input = None   # input (currently one input accepted)
+        self.inputs = []   # input (currently one input accepted)
         self.outputs = []   # points to output nodes
         self.exec_order = []
 
@@ -18,9 +18,7 @@ class Graph:
     def set_inputs_and_outputs(self):
         for _, node in self.nodes_map.items():
             if len(node.dependencies) == 0:
-                if self.input is not None:
-                    ErrorHandler.raise_error("Network already contains input.")
-                self.input = node
+                self.inputs.append(node)
             if len(node.users) == 0:
                 self.outputs.append(node)
                 node.is_output = True
@@ -48,7 +46,8 @@ class Graph:
         return graphviz_str
 
     def calc_dfs(self):
-        self.__calc_dfs_visit(self.input)
+        for input in self.inputs:
+            self.__calc_dfs_visit(input)
         #and update execution numbers
         idx = 0
         for node in self.exec_order:
@@ -57,6 +56,11 @@ class Graph:
 
 
     def __calc_dfs_visit(self, node):
-        self.exec_order.append(node)
-        for dep in node.users:
-            self.__calc_dfs_visit(dep)
+        for dep in node.dependencies:
+            if dep.execution_number == -1:  # if dep already not visited
+                self.__calc_dfs_visit(dep)
+        if node.execution_number == -1:  # if node not already visited
+            self.exec_order.append(node)
+            node.execution_number = 0  # for now its just a mark that node has been visited
+            for user in node.users:
+                self.__calc_dfs_visit(user)
