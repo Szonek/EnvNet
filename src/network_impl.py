@@ -7,6 +7,8 @@ from src.layers.activation_node import ActivationNode
 from src.layers.container_node import ContainerNode
 from src.layers.pooling_node import PoolingNode
 from src.layers.concatenation_node import ConcatenationNode
+from src.layers.softmax_node import SoftmaxNode
+
 
 class NetworkImpl:
     def __init__(self, primitives, dump_graph):
