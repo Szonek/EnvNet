@@ -63,8 +63,7 @@ class ConvolutionNode(Node):
         for N in range(output_shape[0]):
             for C in range(output_shape[1]):
                 bias_value = bias_data[C]
-                for IN_C in range(input_ch):
-                    for H in range(output_shape[2]):
-                        for W in range(output_shape[3]):
-                            out_data[N][C][H][W] += bias_value
+                for H in range(output_shape[2]):
+                    for W in range(output_shape[3]):
+                        out_data[N][C][H][W] += bias_value
         pass
