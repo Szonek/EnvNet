@@ -20,7 +20,7 @@ class MemoryImpl:
             copied_data = np.asarray(new_data, dtype=float)
         else:
             ErrorHandler.is_type_generic(copied_data, np.ndarray)
-        #TODO: ADD CHECKS HERE, IF THE DATA HAS THE CORRET SHAPE
+            ErrorHandler.is_equal(self.shape, copied_data.shape)
         self.__data = copied_data
 
 
