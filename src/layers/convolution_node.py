@@ -44,30 +44,17 @@ class ConvolutionNode(Node):
         in_H = input_memory.shape[2]
         in_W = input_memory.shape[3]
         input_data = input_memory.get_data()
-        if len(np.argwhere(np.isnan(input_data))) != 0:
-            print(np.argwhere(np.isnan(input_data)))
-            print("elo")
         for N in range(output_shape[0]):
             for C in range(output_shape[1]):
                 bias_value = bias_data[C]
-                if len(np.argwhere(np.isnan(bias_value))) != 0:
-                    print(np.argwhere(np.isnan(bias_value)))
-                    print("elo")
                 for H in range(output_shape[2]):
                     for W in range(output_shape[3]):
                         out_data[N][C][H][W] = bias_value
 
-        if len(np.argwhere(np.isnan(out_data))) != 0:
-            print(np.argwhere(np.isnan(out_data)))
-            print("elo")
-
         for N in range(output_shape[0]):
             for C in range(output_shape[1]):
-                bias_value = bias_data[C]
                 for IN_C in range(input_ch):
                     weights_values = weights_data[C][IN_C]
-                    if len(np.argwhere(np.isnan(weights_values))) != 0:
-                        print("elo")
                     for H in range(output_shape[2]):
                         for W in range(output_shape[3]):
                             inp_idx_h = H * stride
@@ -79,10 +66,3 @@ class ConvolutionNode(Node):
                                         if inp_idx_w+j < in_W:
                                             values.append(input_data[N][IN_C][inp_idx_h + i][inp_idx_w + j])
                             out_data[N][C][H][W] += self.do_convolution(values, weights_values)
-                            if np.isnan(out_data[N][C][H][W]):
-                                print("nan")
-                                conv = self.do_convolution(values, weights_values)
-                                conv = self.do_convolution(values, weights_values)
-                                print("end")
-                            #out_data[N][C][H][W] += bias_value
-        pass
