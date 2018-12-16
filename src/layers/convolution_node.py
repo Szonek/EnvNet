@@ -34,6 +34,7 @@ class ConvolutionNode(Node):
     def execute(self):
         output_shape = self.calc_output_shape()
         input_memory = self.dependencies[0].output_memory
+        input_ch = self.input(0).output_memory.shape[1]
         self.output_memory = MemoryImpl(output_shape)
         stride = 1
         kernel_size = self.input(1).output_memory.shape[2]
@@ -45,17 +46,18 @@ class ConvolutionNode(Node):
         input_data = input_memory.get_data()
         for N in range(output_shape[0]):
             for C in range(output_shape[1]):
-                weights_values = weights_data[C]
-                bias_value = bias_data[C]
-                for H in range(output_shape[2]):
-                    for W in range(output_shape[3]):
-                        inp_idx_h = H * stride
-                        inp_idx_w = W * stride
-                        values = []
-                        for i in range(kernel_size):
-                            if inp_idx_h+i < in_H:
-                                for j in range(kernel_size):
-                                    if inp_idx_w+j < in_W:
-                                        values.append(input_data[N][C][inp_idx_h + i][inp_idx_w + j])
-                        out_data[N][C][H][W] = self.do_convolution(values, weights_values, bias_value)
+                for IN_C in range(input_ch):
+                    weights_values = weights_data[C][IN_C]
+                    bias_value = bias_data[C]
+                    for H in range(output_shape[2]):
+                        for W in range(output_shape[3]):
+                            inp_idx_h = H * stride
+                            inp_idx_w = W * stride
+                            values = []
+                            for i in range(kernel_size):
+                                if inp_idx_h+i < in_H:
+                                    for j in range(kernel_size):
+                                        if inp_idx_w+j < in_W:
+                                            values.append(input_data[N][IN_C][inp_idx_h + i][inp_idx_w + j])
+                            out_data[N][C][H][W] = self.do_convolution(values, weights_values, bias_value)
         
