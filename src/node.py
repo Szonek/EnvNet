@@ -18,7 +18,7 @@ class Node:
     def input(self, idx=0):
         if idx > len(self.dependencies)-1:
             ErrorHandler.raise_error("No input with index: ", idx)
-        return self.users[idx]
+        return self.dependencies[idx]
 
     @abstractmethod
     def execute(self):
