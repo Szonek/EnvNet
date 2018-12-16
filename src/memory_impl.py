@@ -17,7 +17,7 @@ class MemoryImpl:
     def fill_data(self, new_data):
         copied_data = new_data
         if isinstance(copied_data, list):
-            copied_data = np.asarray(new_data)
+            copied_data = np.asarray(new_data, dtype=float)
         else:
             ErrorHandler.is_type_generic(copied_data, np.ndarray)
         #TODO: ADD CHECKS HERE, IF THE DATA HAS THE CORRET SHAPE

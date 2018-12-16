@@ -23,5 +23,5 @@ class ActivationNode(Node):
         input_memory = self.dependencies[0].output_memory
         output_shape = input_memory.get_shape()
         self.output_memory = MemoryImpl(output_shape)
-        vectorised_func = np.vectorize(self.do_activation)
+        vectorised_func = np.vectorize(self.do_activation, otypes=[float])
         self.output_memory.fill_data(vectorised_func(input_memory.get_data()))
