@@ -23,12 +23,11 @@ class ConvolutionNode(Node):
         hw_out = (in_wh - kernel_size) + 1
         return (batch, out_ch, hw_out, hw_out)
 
-    def do_convolution(self, input_values, weights_values, bias):
+    def do_convolution(self, input_values, weights_values):
         out = 0
         w_a_flatten = weights_values.flatten()
         for i in range(len(input_values)):
             out += input_values[i] * w_a_flatten[i]
-        out += bias
         return out
 
     def execute(self):
@@ -46,9 +45,9 @@ class ConvolutionNode(Node):
         input_data = input_memory.get_data()
         for N in range(output_shape[0]):
             for C in range(output_shape[1]):
+                bias_value = bias_data[C]
                 for IN_C in range(input_ch):
                     weights_values = weights_data[C][IN_C]
-                    bias_value = bias_data[C]
                     for H in range(output_shape[2]):
                         for W in range(output_shape[3]):
                             inp_idx_h = H * stride
@@ -59,5 +58,13 @@ class ConvolutionNode(Node):
                                     for j in range(kernel_size):
                                         if inp_idx_w+j < in_W:
                                             values.append(input_data[N][IN_C][inp_idx_h + i][inp_idx_w + j])
-                            out_data[N][C][H][W] = self.do_convolution(values, weights_values, bias_value)
-        
+                            out_data[N][C][H][W] += self.do_convolution(values, weights_values)
+                            #out_data[N][C][H][W] += bias_value
+        for N in range(output_shape[0]):
+            for C in range(output_shape[1]):
+                bias_value = bias_data[C]
+                for IN_C in range(input_ch):
+                    for H in range(output_shape[2]):
+                        for W in range(output_shape[3]):
+                            out_data[N][C][H][W] += bias_value
+        pass
