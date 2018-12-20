@@ -10,6 +10,7 @@ from src.layers.concatenation_node import ConcatenationNode
 from src.layers.softmax_node import SoftmaxNode
 from src.layers.convolution_node import Convolution
 from src.layers.reshape_node import Reshape
+from src.layers.linear_node import Linear
 
 class NetworkImpl:
     def __init__(self, primitives, dump_graph):
