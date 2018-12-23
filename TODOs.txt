@@ -1,9 +1,0 @@
-1. Layers:
-	- padding
-	- convolution
-	- fully connected
-	- LRN
-	
-
-4. Examples:
-	- prepare example file with LeNet architecture

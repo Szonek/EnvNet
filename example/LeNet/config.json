@@ -1,0 +1,13 @@
+{
+  "main_window": {
+    "width": 256,
+    "height": 256,
+    "start_x": 100,
+    "start_y": 100
+  },
+  "pensil_size": 6,
+  "weights_folder": "weights",
+  "dump_graph": false,
+  "clear_window_button": "m",
+  "inference_button": "a"
+}
