@@ -76,34 +76,34 @@ class LeNet:
 
     def execute(self):
         return self.net2.execute()
-
-train = pd.read_csv("test.csv").values
-# train = shuffle(train)
-#test  = pd.read_csv("C:\\Users\\szymon\\Desktop\\STUDIA\envnet_reference\\test.csv").values
-nb_batch = 1
-nb_index = 0
-X_data  = train[:, 0:].reshape(train.shape[0], 1, 28, 28)
-#Y = train[:, 0:1]
-X_data  = X_data.astype(float)
-X_data /= 255.0
 #
-net = LeNet()
-
-img_to_network = np.zeros((128, 128, 1))
-while(1):
-    cv2.imshow('image',img_to_network)
-    k = cv2.waitKey(1) & 0xFF
-    if k == ord('a'):
-        img = np.pad(X_data[nb_index].reshape(28, 28, 1), ((2, 2), (2, 2), (0, 0)), mode='constant')
-        img_to_network = sp.zoom(img, (4, 4, 1))
-        img_to_network_2 = sp.zoom(img_to_network, (1/4, 1/4, 1))
-        img_to_network_2 = img_to_network_2.reshape((1, 1, 32, 32))
-        net.set_input(img_to_network_2)
-        net_out = net.execute()
-        net_out = net_out["output"]
-        print("net out: ", np.argmax(net_out))
-        #print("reeal out:", Y[nb_index][0])
-        nb_index = nb_index + 1
-    if k == 27:
-        break
-print('end')
+# train = pd.read_csv("test.csv").values
+# # train = shuffle(train)
+# #test  = pd.read_csv("C:\\Users\\szymon\\Desktop\\STUDIA\envnet_reference\\test.csv").values
+# nb_batch = 1
+# nb_index = 0
+# X_data  = train[:, 0:].reshape(train.shape[0], 1, 28, 28)
+# #Y = train[:, 0:1]
+# X_data  = X_data.astype(float)
+# X_data /= 255.0
+# #
+# net = LeNet()
+#
+# img_to_network = np.zeros((128, 128, 1))
+# while(1):
+#     cv2.imshow('image',img_to_network)
+#     k = cv2.waitKey(1) & 0xFF
+#     if k == ord('a'):
+#         img = np.pad(X_data[nb_index].reshape(28, 28, 1), ((2, 2), (2, 2), (0, 0)), mode='constant')
+#         img_to_network = sp.zoom(img, (4, 4, 1))
+#         img_to_network_2 = sp.zoom(img_to_network, (1/4, 1/4, 1))
+#         img_to_network_2 = img_to_network_2.reshape((1, 1, 32, 32))
+#         net.set_input(img_to_network_2)
+#         net_out = net.execute()
+#         net_out = net_out["output"]
+#         print("net out: ", np.argmax(net_out))
+#         #print("reeal out:", Y[nb_index][0])
+#         nb_index = nb_index + 1
+#     if k == 27:
+#         break
+# print('end')

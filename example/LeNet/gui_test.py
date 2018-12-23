@@ -33,7 +33,7 @@ cv2.setMouseCallback('image',draw_circle)
 while(1):
     cv2.imshow('image',img)
     cv2.namedWindow("real_size")
-    cv2.moveWindow("real_size", 250, 100)
+    cv2.moveWindow("real_size", 350, 100)
     cv2.imshow('real_size',imgsmol.reshape(32, 32, 1))
     k = cv2.waitKey(1) & 0xFF
     if k == ord('m'):
