@@ -2,7 +2,6 @@ from src.node import Node
 from api.reshape import Reshape
 from src.utils.error_handler import ErrorHandler
 from src.memory_impl import MemoryImpl
-import numpy as np
 
 
 class ReshapeNode(Node):

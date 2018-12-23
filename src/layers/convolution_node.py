@@ -1,8 +1,6 @@
 from src.node import Node
-from api.convolution import Convolution
 from src.utils.error_handler import ErrorHandler
 from src.memory_impl import MemoryImpl
-import numpy as np
 
 
 class ConvolutionNode(Node):
@@ -21,7 +19,7 @@ class ConvolutionNode(Node):
         if self.input(0).output_memory.shape[1] != self.input(1).output_memory.shape[1]:
             ErrorHandler.raise_error("Diffrent size of features for input and weights!")
         hw_out = (in_wh - kernel_size) + 1
-        return (batch, out_ch, hw_out, hw_out)
+        return batch, out_ch, hw_out, hw_out
 
     def do_convolution(self, input_values, weights_values):
         out = 0

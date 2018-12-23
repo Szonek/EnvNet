@@ -5,6 +5,10 @@ import example.LeNet.gui as gui
 
 
 class LeNetExample:
+    """
+    Creates and handles the example.
+    Proper file "config.json" should be located in the same dict as this file.
+    """
     def __init__(self):
         self.config = self.__load_config()
         self.model = model.Model(
@@ -14,8 +18,7 @@ class LeNetExample:
             self.config["pensil_size"],
             self.config["main_window"],
             self.config["clear_window_button"],
-            self.config["inference_button"],
-        )
+            self.config["inference_button"])
 
     def __load_config(self):
         config_file_name = "config.json"

@@ -1,5 +1,10 @@
 import inspect
+
+
 class ErrorHandler:
+    """
+    Helper class to throw pretty and understandble exceptions.
+    """
     @classmethod
     def __get_called_method(cls):
         current_frame = inspect.currentframe()

@@ -1,5 +1,4 @@
 from src.node import Node
-from src.memory_impl import MemoryImpl
 
 
 class ContainerNode(Node):

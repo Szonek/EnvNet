@@ -3,6 +3,11 @@ from src.node import Node
 
 
 class Graph:
+    """
+    Class which describe graph.
+    Nodes_map is dict {string, layer_node}
+    It calculates execution order with dfs algorithm (changes for multiple inputs)
+    """
     def __init__(self):
         self.nodes_map = {} # map {id, node}
         self.inputs = []   # input (currently one input accepted)

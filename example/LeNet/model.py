@@ -10,6 +10,13 @@ import numpy as np
 
 
 class Model:
+    """
+    This class defines the LeNet architecture.
+    It uses EnvNet library.
+    Goal of this model is to predict number in range 0-9.
+    Input size: batch x 1 32 x 32
+    Output size: batch x 10
+    """
     def __init__(self, weights_folder="", dump_graph=False):
         self.input_layer = None
         self.output_values = []

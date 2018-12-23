@@ -8,11 +8,17 @@ from src.layers.container_node import ContainerNode
 from src.layers.pooling_node import PoolingNode
 from src.layers.concatenation_node import ConcatenationNode
 from src.layers.softmax_node import SoftmaxNode
-from src.layers.convolution_node import Convolution
+from src.layers.convolution_node import ConvolutionNode
 from src.layers.reshape_node import Reshape
 from src.layers.linear_node import Linear
 
+
 class NetworkImpl:
+    """
+    Implementation of network.
+    It has to make all of the optimizations
+    and calcatuions over primitives (nodes).
+    """
     def __init__(self, primitives, dump_graph):
         ErrorHandler.is_list(primitives)
         self.graph = graph.Graph()

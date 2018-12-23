@@ -4,6 +4,10 @@ from api.memory import Memory
 
 
 class Container(PrimitiveBase):
+    """
+    Placeholder for the data.
+    It can contain input data or weights data.
+    """
     def __init__(self, id, memory):
         ErrorHandler.is_type_generic(memory, Memory)
         super().__init__(id, [])

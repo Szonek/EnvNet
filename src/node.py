@@ -4,6 +4,9 @@ from src.utils.error_handler import ErrorHandler
 
 
 class Node:
+    """
+    Base class of every primitive node.
+    """
     __metaclass__ = ABCMeta
 
     def __init__(self, prim):
