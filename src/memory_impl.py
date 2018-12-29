@@ -1,13 +1,13 @@
 import numpy as np
 import copy
 
-from src.utils.error_handler import  ErrorHandler
+from src.utils.error_handler import ErrorHandler
 
 
 class MemoryImpl:
     """
     If attaching this class to nodes (i.e weights) please
-        add doc with memory layout desciription (what every dimensions mean).
+        add doc with memory layout description (what every dimensions mean).
     """
     def __init__(self, shape):
         ErrorHandler.is_type_generic(shape, tuple)
@@ -22,7 +22,6 @@ class MemoryImpl:
             ErrorHandler.is_type_generic(copied_data, np.ndarray)
             ErrorHandler.is_equal(self.shape, copied_data.shape)
         self.__data = copied_data
-
 
     def get_original_data(self):
         return self.__data

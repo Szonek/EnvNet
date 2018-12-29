@@ -7,6 +7,7 @@ import numpy as np
 class SoftmaxNode(Node):
     def __init__(self, primitive):
         super().__init__(primitive)
+        self.do_log = primitive.do_log
 
     def execute(self):
         input_memory = self.dependencies[0].output_memory
@@ -21,5 +22,7 @@ class SoftmaxNode(Node):
             for C in range(input_memory.shape[1]):
                 for H in range(input_memory.shape[2]):
                     for W in range(input_memory.shape[3]):
-                        out_data[N][C][H][W] = np.exp(inp_data[N][C][H][W])/sum_batch
+                        out_data[N][C][H][W] = np.exp(inp_data[N][C][H][W]) / sum_batch
+                        if self.do_log:
+                            out_data[N][C][H][W] = np.log(out_data[N][C][H][W])
         pass
