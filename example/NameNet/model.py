@@ -1,3 +1,6 @@
+from __future__ import unicode_literals
+import unicodedata
+import string
 from api.network import Network
 from api.container import Container
 from api.memory import Memory
@@ -21,6 +24,11 @@ class Model:
         self.input_hidden_layer = None
         self.output_values = []
         self.net = self.__create_model(weights_folder, dump_graph)
+        self.all_letters = string.ascii_letters + " .,;'"
+        self.categories = ["Arabic", "Chinese", "Czech", "Dutch", "English",
+                           "French", "German", "Greek", "Irish", "Italian",
+                           "Japanese", "Korean", "Polish", "Portuguese",
+                           "Russian", "Scottish", "Spanish", "Vietnamese"]
 
     def __create_model(self, weights_folder, dump_graph):
         layers = []
@@ -56,6 +64,16 @@ class Model:
 
         return Network(layers, dump_graph=dump_graph)
 
+    def __unicode_to_ascii(self, s):
+        return ''.join(
+            c for c in unicodedata.normalize('NFD', s)
+            if unicodedata.category(c) != 'Mn' and c in self.all_letters)
+
+    def word_to_tensor(self, word):
+        tensor = np.zeros((len(word), 1, len(self.all_letters)))
+        for li, letter in enumerate(word):
+            tensor[li][0][self.all_letters.find(letter)] = 1
+        return tensor
 
     def set_input(self, input_data):
         self.input_layer.fill(input_data)
